@@ -1,27 +1,27 @@
 module.exports = function getZerosCount(number, base) {
-	var j = 1; 
+	let j = 1; 
 		i = 2, 
 		zeros = 0,
 		maxZeros = [],
 		primes = [];
 
 	do { 
+        if (base == 2) { 
+            break;
+        }
 		if (base % i == 0 && base != 1) { 
-		
-			primes[j-1] = i; 
-			j++; 
-			base = base / i; 
-
+            primes[j-1] = i;
+            base = base / i;  
+			j++; 	
 		} else { 
 			i++; 
-		} 
-
+		}
 	} while (i < base); 
 		primes[j-1] = i; 
 
-	var degree = 1; 
+	let degree = 1; 
 	
-	primes.forEach(function(item, i, a) { 
+	primes.forEach(function(item, i) { 
 		while (number/Math.pow(primes[i], degree) > 1) { 
 			
 			zeros += Math.floor(number / Math.pow(primes[i], degree)); 
@@ -33,27 +33,25 @@ module.exports = function getZerosCount(number, base) {
 		degree = 1; 
 	}); 
 
-	var count = 1; 
+	let count = 1; 
 
-	primes.forEach(function(item, i, a) { 
-		if (i < primes.length -1) { 
-			
+	primes.forEach(function(item, i) { 
+		if (i < primes.length -1) { 	
 			if (primes[i] == primes[i+1]) { 
 				count++; 
-
 			} else { 
 				maxZeros[i] = Math.floor(maxZeros[i]/count); 
 				count = 1; 
-			} 
+			}
 		} else { 
 			maxZeros[i] = Math.floor(maxZeros[i]/count); 
 			count = 1; 
 		} 
 	}); 
 
-	var minZeros = maxZeros[0];
+	let minZeros = maxZeros[0];
 
-	maxZeros.forEach(function(h, i, maxZeros) {
+	maxZeros.forEach(function(item, i,) {
 	    if (i < maxZeros.length -1) { 
             if (maxZeros[i] <= maxZeros[i+1]) { 
                 minZeros = maxZeros[i];
@@ -64,7 +62,5 @@ module.exports = function getZerosCount(number, base) {
 	        }
 	    }            
 	});
-
-
 	return minZeros;
 }
