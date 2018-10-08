@@ -23,11 +23,9 @@ module.exports = function getZerosCount(number, base) {
 	
 	primes.forEach(function(item, i) { 
 		while (number/Math.pow(primes[i], degree) > 1) { 
-			
 			zeros += Math.floor(number / Math.pow(primes[i], degree)); 
 			degree++; 
-		} 
-		
+		}		
 		maxZeros.push(zeros); 
 		zeros = 0; 
 		degree = 1; 
